@@ -1,5 +1,6 @@
 export interface IAwsCred {
     accesskey: string,
     secretkey: string,
-    id?: string
+    id?: string,
+    region?: string
 }

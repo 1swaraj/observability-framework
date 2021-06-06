@@ -56,5 +56,5 @@
     "serviceName": "Cognito",
     "usernameCaseSensitive": false,
     "dependsOn": [],
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:4200/\",\"https://dev8582.d3i1w8nk6i91rh.amplifyapp.com/\"],\"LogoutURLs\":[\"http://localhost:4200/\"]}"
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:4200/\",\"https://dev8582.d3i1w8nk6i91rh.amplifyapp.com/\"],\"LogoutURLs\":[\"http://localhost:4200/\",\"https://dev8582.d3i1w8nk6i91rh.amplifyapp.com/\"]}"
 }

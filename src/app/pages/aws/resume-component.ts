@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
 })
 export class ResumeEC2Component {
     @Input() selected_ip = "";
+    @Input() region = "";
     @Output() resumeEC2: EventEmitter < IAwsCred > = new EventEmitter < IAwsCred > ();
     resumeInstance(): void {
         (async () => {
@@ -23,7 +24,7 @@ export class ResumeEC2Component {
                     text: "You have not entered your credentials."
                 })
             } else {
-                let allDetails :IAwsCred = {accesskey:localStorage.getItem('awsAccessKey'),secretkey: localStorage.getItem('awsSecretKey'),id: this.selected_ip}
+                let allDetails :IAwsCred = {accesskey:localStorage.getItem('awsAccessKey'),secretkey: localStorage.getItem('awsSecretKey'),id: this.selected_ip,region:this.region}
                 this.resumeEC2.emit(allDetails);
             }
 

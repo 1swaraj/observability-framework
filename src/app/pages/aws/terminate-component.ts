@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
 })
 export class TerminateEC2Component {
     @Input() selected_ip = "";
+    @Input() region = "";
     @Output() terminateEC2: EventEmitter < IAwsCred > = new EventEmitter < IAwsCred > ();
     terminateInstance(): void {
         (async () => {
@@ -22,7 +23,7 @@ export class TerminateEC2Component {
                     text: "You have not entered your credentials."
                 })
             } else {
-                let allDetails :IAwsCred = {accesskey:localStorage.getItem('awsAccessKey'),secretkey: localStorage.getItem('awsSecretKey'),id: this.selected_ip}
+                let allDetails :IAwsCred = {accesskey:localStorage.getItem('awsAccessKey'),secretkey: localStorage.getItem('awsSecretKey'),id: this.selected_ip,region: this.region}
                 this.terminateEC2.emit(allDetails);
             }
         })()

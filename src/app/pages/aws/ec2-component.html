@@ -42,9 +42,9 @@
                   <td>{{ec2.cpu | percent }}</td>
                   <td>{{ec2.status}}</td>
                   <td>
-                    <stop-ec2 *ngIf="ec2.status==='running'" [selected_ip]='ec2.identifier' (stopEC2)='onStopEC2($event)'></stop-ec2>
-                    <terminate-ec2 *ngIf="ec2.status==='stopped'||ec2.status==='running'" [selected_ip]='ec2.identifier' (terminateEC2)='onTerminateEC2($event)'></terminate-ec2>
-                    <resume-ec2 *ngIf="ec2.status==='stopped'" [selected_ip]='ec2.identifier' (resumeEC2)='onResumeEC2($event)'></resume-ec2>
+                    <stop-ec2 *ngIf="ec2.status==='running'" [selected_ip]='ec2.identifier' [region]='ec2.region' (stopEC2)='onStopEC2($event)'></stop-ec2>
+                    <terminate-ec2 *ngIf="ec2.status==='stopped'||ec2.status==='running'" [selected_ip]='ec2.identifier' [region]='ec2.region' (terminateEC2)='onTerminateEC2($event)'></terminate-ec2>
+                    <resume-ec2 *ngIf="ec2.status==='stopped'" [selected_ip]='ec2.identifier' [region]='ec2.region' (resumeEC2)='onResumeEC2($event)'></resume-ec2>
                   </td>
                 </tr>
               </tbody>

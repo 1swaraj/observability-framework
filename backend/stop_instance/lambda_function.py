@@ -3,7 +3,7 @@ import boto3
 
 def lambda_handler(event, context):
     body = json.loads(event["body"])
-    ec2 = boto3.resource('ec2',aws_access_key_id=body["accesskey"],aws_secret_access_key=body["secretkey"])
+    ec2 = boto3.resource('ec2',aws_access_key_id=body["accesskey"],aws_secret_access_key=body["secretkey"],region_name=body["region"])
     res = ec2.instances.filter(InstanceIds = [body["id"]]).stop()
     print(res)
     return {
@@ -12,5 +12,5 @@ def lambda_handler(event, context):
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*'
         },
-        'body': json.dumps("Your EC2 Instance has been stopped. Please refresh the browser to see the updates.")
+        'body': json.dumps("Stopped Instance")
     }
