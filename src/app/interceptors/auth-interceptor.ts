@@ -21,8 +21,11 @@ export class AuthInterceptor implements HttpInterceptor {
             }).catch(err => localStorage.removeItem("jwtToken"));
         }
         if (jwtToken) {
+            req.headers.set('Access-Control-Allow-Origin', '*')
+            req.headers.set('Access-Control-Allow-Credentials', "true")
             const cloned = req.clone({
-                headers: req.headers.set("Authorization",jwtToken)
+                headers: req.headers.set("Authorization", jwtToken)
+                
             });
             return next.handle(cloned);
         }

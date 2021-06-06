@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "multicloudobsframewoa4ce8e5b_identitypool_a4ce8e5b",
+    "identityPoolName": "mtx944338ab_identitypool_944338ab",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "multica4ce8e5b",
-    "userPoolName": "multicloudobsframewoa4ce8e5b_userpool_a4ce8e5b",
+    "resourceNameTruncated": "mtx944338ab",
+    "userPoolName": "mtx944338ab_userpool_944338ab",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -28,10 +28,10 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "multica4ce8e5b_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "mtx944944338ab_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "a4ce8e5b",
-    "resourceName": "multicloudobsframewoa4ce8e5b",
+    "sharedId": "944338ab",
+    "resourceName": "mtx944338ab",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
@@ -47,7 +47,7 @@
     },
     "useDefault": "defaultSocial",
     "hostedUI": true,
-    "hostedUIDomainName": "mtx",
+    "hostedUIDomainName": "mtx944338ab-944338ab",
     "authProvidersUserPool": [
         "Google"
     ],
@@ -56,5 +56,5 @@
     "serviceName": "Cognito",
     "usernameCaseSensitive": false,
     "dependsOn": [],
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://master.dxo03xahtgqrz.amplifyapp.com/\",\"http://localhost:4200/\"],\"LogoutURLs\":[\"https://master.dxo03xahtgqrz.amplifyapp.com/\",\"http://localhost:4200/\"]}"
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:4200/\",\"https://dev8582.d3i1w8nk6i91rh.amplifyapp.com/\"],\"LogoutURLs\":[\"http://localhost:4200/\"]}"
 }

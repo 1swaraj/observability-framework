@@ -1,6 +1,6 @@
 {
   "auth": {
-    "multicloudobsframewoa4ce8e5b": {
+    "mtx944338ab": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],

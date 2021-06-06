@@ -10,7 +10,7 @@ import { IAwsec2 } from '../interfaces/aws_ec2_details';
 })
 export class AwsService {
     
-    private apiEndpoint = 'https://czehv8m960.execute-api.ap-southeast-1.amazonaws.com/v0/';
+    private apiEndpoint = 'https://2hwk5p074d.execute-api.ap-southeast-1.amazonaws.com/v1/';
   
     constructor(private http: HttpClient) { }
     
