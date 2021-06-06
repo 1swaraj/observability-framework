@@ -1,0 +1,57 @@
+<app-loader *ngIf="!ec2sub?.closed || !costsub?.closed"></app-loader>
+<div *ngIf="ec2sub?.closed && costsub?.closed">
+  <h4 class="text-muted mb-4">AWS </h4>
+  <app-cost [cost]='awscost' [cloud]='"Amazon Web Services"'></app-cost>
+  <div class="row mb-4">
+    <div class="col-md-12">
+      <div class="card border-0 rounded-0">
+        <div class="card-title mb-1 p-3">
+          <h5>EC2 Instances Running on AWS</h5>
+        </div>
+        <div class="card-body">
+          <div class='row'>
+            <div class='col-md-2'>Filter by Identifier:</div>
+            <div class='col-md-4'>
+              <input type='text' [(ngModel)]='listFilter' />
+            </div>
+          </div>
+          <br>
+          <div class="table-responsive-md">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Identifier</th>
+                  <th scope="col">Private IP</th>
+                  <th scope="col">Public IP</th>
+                  <th scope="col">Type</th>
+                  <th scope="col">Region</th>
+                  <th scope="col">CPU Utilization</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor='let ec2 of filteredEC2'>
+                  <th scope="row">{{ec2.sr}}</th>
+                  <td>{{ec2.identifier}}</td>
+                  <td>{{ec2.priv_ip}}</td>
+                  <td>{{ec2.pub_ip}}</td>
+                  <td>{{ec2.type}}</td>
+                  <td>{{ec2.region}}</td>
+                  <td>{{ec2.cpu | percent }}</td>
+                  <td>{{ec2.status}}</td>
+                  <td>
+                    <stop-ec2 *ngIf="ec2.status==='running'" [selected_ip]='ec2.identifier' (stopEC2)='onStopEC2($event)'></stop-ec2>
+                    <terminate-ec2 *ngIf="ec2.status==='stopped'||ec2.status==='running'" [selected_ip]='ec2.identifier' (terminateEC2)='onTerminateEC2($event)'></terminate-ec2>
+                    <resume-ec2 *ngIf="ec2.status==='stopped'" [selected_ip]='ec2.identifier' (resumeEC2)='onResumeEC2($event)'></resume-ec2>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

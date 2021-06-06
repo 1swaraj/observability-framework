@@ -1,0 +1,47 @@
+<app-loader *ngIf="!vmsub?.closed || !upcostsub?.closed"></app-loader>
+<div *ngIf="vmsub?.closed && upcostsub?.closed">
+  <h4 class="text-muted mb-4">Upcloud </h4>
+  <app-cost [cost]='docost' [cloud]='"Upcloud"'></app-cost>
+  <div class="row mb-4">
+    <div class="col-md-12">
+      <div class="card border-0 rounded-0">
+        <div class="card-title mb-1 p-3">
+          <h5>VMs Running on Upcloud</h5>
+        </div>
+        <div class="card-body">
+          <div class='row'>
+            <div class='col-md-2'>Filter by Name:</div>
+            <div class='col-md-4'>
+              <input type='text' [(ngModel)]='listFilter' />
+            </div>
+          </div>
+          <br>
+          <div class="table-responsive-md">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Hostname</th>
+                  <th scope="col">Zone</th>
+                  <th scope="col">Plan</th>
+                  <th scope="col">State</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor='let vm of filteredVM'>
+                  <th scope="row">{{vm.uuid}}</th>
+                  <td>{{vm.title}}</td>
+                  <td>{{vm.hostname}}</td>
+                  <td>{{vm.zone}}</td>
+                  <td>{{vm.plan}}</td>
+                  <td>{{vm.state}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

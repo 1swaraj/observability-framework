@@ -1,0 +1,66 @@
+<div>
+  <h4 class="mb-4 text-muted">Dashboard </h4>
+  <div class="row">
+    <div class="col-md-12 col-lg-6 mb-4 align-items-stretch" >
+      <div class="card border-0 rounded-0 h-100">
+        <div class="card-title mb-1 p-3">
+          <h5>AWS Credentials</h5>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="awsForm" (ngSubmit)="onSubmitAWS()">
+            <div class="form-group">
+              <label for="accessKey">Aws AccessKey</label>
+              <input type="text" class="form-control rounded-0" formControlName="accessKey"
+                placeholder="Enter AWS Access Key">
+              <small class="form-text text-muted">We do not store your access key or private key.</small>
+            </div>
+            <div class="form-group">
+              <label for="secretKey">AWS SecretKey</label>
+              <input type="password" class="form-control rounded-0" formControlName="secretKey" placeholder="AWS secretKey">
+            </div>
+            <input type="submit" class="btn btn-lightning rounded-0 mb-2 mr-2" value="Submit">
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 col-lg-6 mb-4 align-items-stretch">
+      <div class="card border-0 rounded-0 h-100">
+        <div class="card-title mb-1 p-3">
+          <h5>Digital Ocean Credentials</h5>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="doForm" (ngSubmit)="onSubmitDO()">
+            <div class="form-group">
+              <label for="apiKey">DigitalOcean ApiKey</label>
+              <input type="password" class="form-control rounded-0" formControlName="doapi" placeholder="Enter DigitalOcean ApiKey">
+              <small class="form-text text-muted">We do not store your access key or private key.</small>
+            </div>
+            <input type="submit" class="btn btn-lightning rounded-0 mb-2 mr-2" value="Submit">
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 col-lg-6 mb-4 align-items-stretch">
+      <div class="card border-0 rounded-0 h-100">
+        <div class="card-title mb-1 p-3">
+          <h5>Upcloud Credentials</h5>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="upcloudForm" (ngSubmit)="onSubmitUpcloud()">
+            <div class="form-group">
+              <label for="user">Upcloud User</label>
+              <input type="text" class="form-control rounded-0" formControlName="upclouduser" id="user"
+                placeholder="Enter Upcloud ApiKey">
+              <small class="form-text text-muted">We do not store your access key or private key.</small>
+            </div>
+            <div class="form-group">
+              <label for="apikey">Upcloud API</label>
+              <input type="password" id="apikey" class="form-control rounded-0" formControlName="upcloudapi" placeholder="Upcloud API Key">
+            </div>
+            <input type="submit" class="btn btn-lightning rounded-0 mb-2 mr-2" value="Submit">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

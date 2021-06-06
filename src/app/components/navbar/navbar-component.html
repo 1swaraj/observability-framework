@@ -1,0 +1,24 @@
+<nav class="navbar navbar-expand-md fixed-top navbar-dark flex-fill">
+  <div class="navbar-header pl-2 pr-2 ml-3 text-center">
+    <a class="navbar-brand m-0 w-100" href="/">
+      <span class="ml-1">MTX</span>
+    </a>
+  </div>
+  <div class="sidebar-toggler ml-auto mr-3">
+    <a class="btn nav-link" (click)="toggleSidebar()"><i class="fa fa-bars"></i></a>
+  </div>
+  <ul class="navbar-nav flex-fill mt-1 align-items-center left-nav">
+    <li class="nav-item navicon">
+      <a class="btn nav-link" (click)="toggleSidebarPin()"><i class="fa fa-bars"></i></a>
+    </li>
+  </ul>
+  <div class="collapse navbar-collapse right-nav" id="collapseBasic" >
+    <ul class="navbar-nav ">
+      <li class="nav-item">
+        <a class="btn nav-link">
+            <amplify-sign-out></amplify-sign-out>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
