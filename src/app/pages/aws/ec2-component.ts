@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { IAwsCred } from 'src/app/interfaces/aws_credentails';
 import Swal from 'sweetalert2';
@@ -23,7 +24,7 @@ export class EC2Component implements OnInit {
   costsub!: Subscription;
   public ec2_details: IAwsec2[] = [];
 
-  constructor(private awsservice: AwsService) { }
+  constructor(private awsservice: AwsService,private router: Router) { }
   
   get listFilter(): string {
     return this._listFilter;
@@ -40,8 +41,22 @@ export class EC2Component implements OnInit {
   }
 
   ngOnInit() {
-    if (localStorage.getItem("awsAccessKey") == null || localStorage.getItem("awsSecretKey") == null) {
-      Swal.fire("Please enter the aws credentials on the homepage")
+    if (localStorage.getItem("awsAccessKey") == null || localStorage.getItem("awsSecretKey") == null || localStorage.getItem("awsAccessKey") == "" || localStorage.getItem("awsSecretKey") == "" ) {
+      Swal.fire({
+        title: "Please enter the aws credentials on the homepage",
+        showDenyButton: true,
+        confirmButtonText: `Take me there`,
+        denyButtonText: 'Reload'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.router.navigate(['/'])
+        } else if (result.isDenied) {
+          let currentUrl = this.router.url;
+          this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+              this.router.navigate([currentUrl]);
+          });
+        }
+      })
     } else {
       let creds: IAwsCred={accesskey:localStorage.getItem("awsAccessKey"),secretkey:localStorage.getItem("awsSecretKey")}
       this.ec2sub = this.awsservice.getInstances(creds).subscribe({
@@ -61,7 +76,9 @@ export class EC2Component implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.ec2sub.unsubscribe();
+    if (this.ec2sub) {
+      this.ec2sub.unsubscribe();
+    }
   }
 
   onStopEC2(details: IAwsCred): void {

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { IDoCred } from 'src/app/interfaces/do_credentials';
 import { IDroplet } from 'src/app/interfaces/droplet_details';
@@ -22,7 +23,7 @@ export class DOComponent implements OnInit {
   docostsub!: Subscription;
   public droplet_details: IDroplet[] = [];
 
-  constructor(private doservice: DoService) { }
+  constructor(private doservice: DoService,private router: Router) { }
   
   get listFilter(): string {
     return this._listFilter;
@@ -39,8 +40,22 @@ export class DOComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (localStorage.getItem("doAPI") == null) {
-      Swal.fire("Please enter the digital ocean credentials on the homepage")
+    if (localStorage.getItem("doAPI") == null || localStorage.getItem("doAPI") == "") {
+      Swal.fire({
+        title: "Please enter the digital ocean credentials on the homepage",
+        showDenyButton: true,
+        confirmButtonText: `Take me there`,
+        denyButtonText: 'Reload'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.router.navigate(['/'])
+        } else if (result.isDenied) {
+          let currentUrl = this.router.url;
+          this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+              this.router.navigate([currentUrl]);
+          });
+        }
+      })
     } else {
       let creds: IDoCred={api:localStorage.getItem("doAPI")}
       this.dropletsub = this.doservice.getInstances(creds).subscribe({
@@ -60,7 +75,9 @@ export class DOComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.dropletsub.unsubscribe();
+    if (this.dropletsub) {
+      this.dropletsub.unsubscribe();
+    }
   }
 
 }

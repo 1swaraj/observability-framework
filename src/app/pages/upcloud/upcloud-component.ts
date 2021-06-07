@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { IUpcloudCred } from 'src/app/interfaces/upcloud_credentials';
 import { IUpcloud } from 'src/app/interfaces/upcloud_details';
@@ -22,7 +23,7 @@ export class UpcloudComponent implements OnInit {
   upcostsub!: Subscription;
   public vm_details: IUpcloud[] = [];
 
-  constructor(private upcloudservice: UpcloudService) { }
+  constructor(private upcloudservice: UpcloudService,private router:Router) { }
   
   get listFilter(): string {
     return this._listFilter;
@@ -40,7 +41,21 @@ export class UpcloudComponent implements OnInit {
 
   ngOnInit() {
     if (localStorage.getItem("upcloudAPI") == null || localStorage.getItem("upcloudUser") == null) {
-      Swal.fire("Please enter the upcloud credentials on the homepage")
+      Swal.fire({
+        title: "Please enter the upcloud credentials on the homepage",
+        showDenyButton: true,
+        confirmButtonText: `Take me there`,
+        denyButtonText: 'Reload'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.router.navigate(['/'])
+        } else if (result.isDenied) {
+          let currentUrl = this.router.url;
+          this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+              this.router.navigate([currentUrl]);
+          });
+        }
+      })
     } else {
       let creds: IUpcloudCred={user:localStorage.getItem("upcloudUser"),api:localStorage.getItem("upcloudAPI")}
       this.vmsub = this.upcloudservice.getInstances(creds).subscribe({
@@ -60,7 +75,9 @@ export class UpcloudComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.vmsub.unsubscribe();
+    if (this.vmsub) {
+      this.vmsub.unsubscribe();
+    }
   }
 
 }
